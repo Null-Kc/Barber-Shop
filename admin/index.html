@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-     *{
+      * {
         margin: 0;
         padding: 0;
         border: none;
@@ -14,160 +14,203 @@
       }
 
       .card {
-          position: relative;
-          border: 1px solid #686868;
-          border-radius: 20px;
-          padding: 20px;
-          width: 100%;
-          margin-bottom: 10px;
-          background-color: #FFFFFF;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s ease;
-          cursor: pointer;
+        position: relative;
+        border: 1px solid #686868;
+        border-radius: 20px;
+        padding: 20px;
+        width: 100%;
+        margin-bottom: 10px;
+        background-color: #FFFFFF;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
       }
 
       .card:hover {
-          transform: scale(1.05);
+        transform: scale(1.05);
       }
 
       .card p {
-          font-size: 16px;
-          padding-bottom: 10px;
-          color: #686868;
-          font-weight: bold;
-          background-color: #FFFFFF;
+        font-size: 16px;
+        padding-bottom: 10px;
+        color: #686868;
+        font-weight: bold;
+        background-color: #FFFFFF;
       }
 
       .card .delete-icon {
-          position: absolute;
-          top: 60px;
-          right: 20px;
-          color: #dc3545;
-          background-color: #FFFFFF;
-          font-size: 50px;
-          cursor: pointer;
-          transition: color 0.3s ease;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        color: #dc3545;
+        background-color: #FFFFFF;
+        font-size: 50px;
+        cursor: pointer;
+        transition: color 0.3s ease;
       }
 
       .card .delete-icon:hover {
-          color: #c82333;
+        color: #c82333;
       }
 
-      .title{
+      .title {
         font-size: 40px;
         font-weight: bold;
         color: #FFFFFF;
         text-align: center;
         padding-top: 25px;
         padding-bottom: 25px;
-        font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+        font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif; 
       }
 
-      .box_agenda{
+      .box_agenda {
         display: block;
         margin: 0 auto;
         width: 90%;
         flex-direction: row;
         justify-content: center; 
       }
-  </style>
+
+      .day-section {
+        color: #FFFFFF;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .day-section h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+    </style>
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+      import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyAqSj6uOMqFuL3YoUxdgHZUil75ebPkNlU",
-          authDomain: "agendamento-390700.firebaseapp.com",
-          projectId: "agendamento-390700",
-          storageBucket: "agendamento-390700.appspot.com",
-          messagingSenderId: "1093556016847",
-          appId: "1:1093556016847:web:e53f4c27cd2a21bfe449ba",
-          measurementId: "G-L13DEMJPWB"
-        };
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAqSj6uOMqFuL3YoUxdgHZUil75ebPkNlU",
+        authDomain: "agendamento-390700.firebaseapp.com",
+        projectId: "agendamento-390700",
+        storageBucket: "agendamento-390700.appspot.com",
+        messagingSenderId: "1093556016847",
+        appId: "1:1093556016847:web:e53f4c27cd2a21bfe449ba",
+        measurementId: "G-L13DEMJPWB"
+      };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore();
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore();
 
-        // Função para criar um card com as informações do documento
-        function createCard(documentId, data) {
-          // Cria o elemento card
-          const card = document.createElement("div");
-          card.className = "card";
-          card.id = documentId;
+      // Função para criar um card com as informações do documento
+      function createCard(documentId, data, section) {
 
-          // Cria um elemento para exibir as informações do documento
-          const info = document.createElement("div");
-          
-          const name = document.createElement("p");
-          name.textContent = `Nome: ${data.name}`;
-          info.appendChild(name);
-          
-          const phoneNumber = document.createElement("p");
-          phoneNumber.textContent = `Telefone: ${data.phoneNumber}`;
-          info.appendChild(phoneNumber);
-          
-          const service = document.createElement("p");
-          service.textContent = `Servico: ${data.servico}`;
-          info.appendChild(service);
-          
-          const day = document.createElement("p");
-          day.textContent = `Data: ${data.day}`;
-          info.appendChild(day);
-          
-          const time = document.createElement("p");
-          time.textContent = `Horario: ${data.time}`;
-          info.appendChild(time);
+        // Cria o elemento card
+        const card = document.createElement("div");
+        card.className = "card";
+        card.id = documentId;
 
-          // Cria o ícone de lixeira para exclusão do documento
-          const deleteIcon = document.createElement("i");
-          deleteIcon.className = "fas fa-trash delete-icon";
-          deleteIcon.addEventListener("click", () => {
-            // Função para excluir o documento ao clicar no ícone
-            deleteDocument(documentId);
-          });
+        // Cria um elemento para exibir as informações do documento
+        const info = document.createElement("div");
+        
+        const name = document.createElement("p");
+        name.textContent = `Nome: ${data.name}`;
+        info.appendChild(name);
+        
+        const phoneNumber = document.createElement("p");
+        phoneNumber.textContent = `Telefone: ${data.phoneNumber}`;
+        info.appendChild(phoneNumber);
+        
+        const service = document.createElement("p");
+        service.textContent = `Servico: ${data.servico}`;
+        info.appendChild(service);
+        
+        const day = document.createElement("p");
+        day.textContent = `Data: ${data.day}`;
+        info.appendChild(day);
+        
+        const time = document.createElement("p");
+        time.textContent = `Horario: ${data.time}`;
+        info.appendChild(time);
 
-          // Adiciona as informações e o ícone ao card
-          card.appendChild(info);
-          card.appendChild(deleteIcon);
+        // Cria o ícone de lixeira para exclusão do documento
+        const deleteIcon = document.createElement("i");
+        deleteIcon.className = "fas fa-trash delete-icon";
+        deleteIcon.addEventListener("click", () => {
+          // Função para excluir o documento ao clicar no ícone
+          deleteDocument(documentId);
+        });
 
-          // Adiciona o card ao container
-          const container = document.getElementById("cardsContainer");
-          container.appendChild(card);
-        }
+        // Adiciona as informações e o ícone ao card
+        card.appendChild(info);
+        card.appendChild(deleteIcon);
 
-        // Função para excluir um documento do Firestore
-        function deleteDocument(documentId) {
-          const card = document.getElementById(documentId);
-          card.style.opacity = 0.5; // Altera a opacidade do card durante a exclusão
+        // Adiciona o card à seção
+        section.appendChild(card);
+      }
 
-          // Exclui o documento do Firestore
-          deleteDoc(doc(db, "Horarios", documentId))
-            .then(() => {
-              card.remove();
-            })
-            .catch((error) => {
-              console.error("Erro ao excluir documento: ", error);
-              card.style.opacity = 1; // Restaura a opacidade do card em caso de erro
-            });
-        }
+      // Função para excluir um documento do Firestore
+      function deleteDocument(documentId) {
+        const card = document.getElementById(documentId);
+        card.style.opacity = 0.5; // Altera a opacidade do card durante a exclusão
 
-        // Obtém os documentos da coleção "Horarios" e cria os cards
-        getDocs(collection(db, "Horarios"))
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              const documentId = doc.id;
-              const data = doc.data();
-
-              // Cria um card para cada documento
-              createCard(documentId, data);
-            });
+        // Exclui o documento do Firestore
+        deleteDoc(doc(db, "Horarios", documentId))
+          .then(() => {
+            card.remove();
           })
           .catch((error) => {
-            console.error("Erro ao obter documentos: ", error);
+            console.error("Erro ao excluir documento: ", error);
+            card.style.opacity = 1; // Restaura a opacidade do card em caso de erro
           });
+      }
+
+      // Obtém os documentos da coleção "Horarios" e cria os cards
+      getDocs(collection(db, "Horarios"))
+        .then((querySnapshot) => {
+            const cardsByDay = {}; // Objeto para armazenar os cards agrupados por data.day
+
+            querySnapshot.forEach((doc) => {
+                const documentId = doc.id;
+                const data = doc.data();
+
+                // Agrupa os cards por data.day
+                if (cardsByDay[data.day]) {
+                    cardsByDay[data.day].push({ documentId, data });
+                } else {
+                    cardsByDay[data.day] = [{ documentId, data }];
+                }
+            });
+
+            // Itera sobre o objeto cardsByDay e exibe os cards agrupados por data.day
+            const container = document.getElementById("cardsContainer");
+
+            for (const day in cardsByDay) {
+                // Cria a seção para cada dia
+                const section = document.createElement("div");
+                section.className = "day-section";
+                section.id = `section-${day}`;
+
+                // Cria o título do dia
+                const dayTitle = document.createElement("h2");
+                dayTitle.textContent = `Dia: ${day}`;
+
+                // Adiciona o título do dia à seção
+                section.appendChild(dayTitle);
+
+                // Adiciona a seção ao container
+                container.appendChild(section);
+
+                // Cria os cards para cada documento do dia
+                cardsByDay[day].forEach(({ documentId, data }) => {
+                    createCard(documentId, data, section);
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Erro ao obter documentos: ", error);
+        });
     </script>
 </head>
 <body>
