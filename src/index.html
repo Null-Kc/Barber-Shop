@@ -27,7 +27,6 @@
         measurementId: "G-L13DEMJPWB"
       };
 
-      
 
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
@@ -96,12 +95,19 @@
               const isAvailable = await checkAvailability();
 
               if (isAvailable) {
-                  addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);
-                  Apagar.click();
-                  const textoAlet = document.querySelector("#texto_alert");
-                  textoAlet.innerHTML = "Agendamento Confirmado <br><br> Press";
-                  const alertBox = document.getElementById("alert");
-                  alertBox.style.visibility = "visible";
+                  
+                addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);
+                  
+                Apagar.click();
+                
+                const textoAlet = document.querySelector("#texto_alert");
+                textoAlet.innerHTML = "Agendamento Confirmado <br><br> Press";
+                const alertBox = document.getElementById("alert");
+                alertBox.style.visibility = "visible";
+
+                const cabeloReset = document.querySelector("#cabelo");
+                
+                toggleCheckbox(cabeloReset);
               } else {
                 const alertBox = document.getElementById("alert");
                 alertBox.style.visibility = "visible";
@@ -110,8 +116,6 @@
               console.error("Error checking availability: ", error);
           }
       });
-
-      
   </script>
   </head>
   <body>
@@ -133,7 +137,7 @@
 
           <div class="input_container">
             <label for="phoneNumberInput:" class="texto_input_padrao">Digite seu telefone de contato:</label>
-            <input type="number" class="input_padrao" id="phoneNumberInput" name="phoneNumberInput:" placeholder="(88) 99945-1245" required>
+            <input type="text" class="input_padrao" id="phoneNumberInput" name="phoneNumberInput:" placeholder="(88) 99945-1245" required>
           </div>
 
           <div class="input_container">
@@ -220,63 +224,79 @@
       </div>
     </main>
 
-    <script>
-      function checkSelection() {
-          var checkboxes = document.getElementsByName('servicos');
-          
-          var selectedCheckbox = null;
-          
-          checkboxes.forEach(function(checkbox) {
-              if (checkbox.checked) {
-                  selectedCheckbox = checkbox.id;
-              }
-          });
-          
-          if (selectedCheckbox === null) {
-            alert("No checkbox selected.");
+  <script>
+    function checkSelection() {
+      var checkboxes = document.getElementsByName('servicos');
+      
+      var selectedCheckbox = null;
+      
+      checkboxes.forEach(function(checkbox) {
+          if (checkbox.checked) {
+              selectedCheckbox = checkbox.id;
           }
-          else{
-            return selectedCheckbox;
-          }
+      });
+      
+      if (selectedCheckbox === null) {
+        alert("No checkbox selected.");
       }
+      else{
+        return selectedCheckbox;
+      }
+    }
   </script>
 
+<script>
+  var telefoneInput = document.getElementById('phoneNumberInput');
+
+  telefoneInput.addEventListener('blur', function() {
+    var numero = telefoneInput.value.replace(/\D/g, '');
+    var formatado;
+
+    if (numero.length === 11) {
+      formatado = numero.substr(0, 2) + ' ' + numero.substr(2, 1) + ' ' + numero.substr(3, 4) + '-' + numero.substr(7, 4);
+    } else {
+      formatado = numero;
+    }
+
+    telefoneInput.value = formatado;
+  });
+</script>
+
   <script>
-      function toggleCheckbox(currentCheckbox) {
-  
-          var checkboxes = document.getElementsByName('servicos');
-          const valorServico = document.getElementById("valor_servico");
-          const valorTotal = document.getElementById("valor_total");
-          const rsServico = document.getElementById("rs_servico");
-          const rsTotal = document.getElementById("rs_total");
-          
-          valorServico.innerHTML= parseInt(currentCheckbox.value);
-          valorTotal.innerHTML= (parseInt(currentCheckbox.value) + 1);
-          
-          if(currentCheckbox.value == "Nao Disponivel"){
-            
+    function toggleCheckbox(currentCheckbox) {
+      var checkboxes = document.getElementsByName('servicos');
+      const valorServico = document.getElementById("valor_servico");
+      const valorTotal = document.getElementById("valor_total");
+      const rsServico = document.getElementById("rs_servico");
+      const rsTotal = document.getElementById("rs_total");
+      
+      valorServico.innerHTML= parseInt(currentCheckbox.value);
+      valorTotal.innerHTML= (parseInt(currentCheckbox.value) + 1);
+      
+      if(currentCheckbox.value == "Nao Disponivel"){
+        
 
-            valorServico.innerHTML = currentCheckbox.value;
-            valorTotal.innerHTML = "Entre em contato";
-            rsServico.innerHTML = "";
-            rsTotal.innerHTML = "";
-          }
-          else{
-            rsServico.innerHTML = "R$";
-            rsTotal.innerHTML = "R$";
-          }
-
-          checkboxes.forEach(function(checkbox) {
-              if (checkbox !== currentCheckbox) {
-                  checkbox.checked = false;
-              }
-          });
+        valorServico.innerHTML = currentCheckbox.value;
+        valorTotal.innerHTML = "Entre em contato";
+        rsServico.innerHTML = "";
+        rsTotal.innerHTML = "";
       }
+      else{
+        rsServico.innerHTML = "R$";
+        rsTotal.innerHTML = "R$";
+      }
+
+      checkboxes.forEach(function(checkbox) {
+          if (checkbox !== currentCheckbox) {
+              checkbox.checked = false;
+          }
+      });
+    }
   </script>
   <script>
     function hiddenAlertBox(){
-        const alertBox = document.getElementById("alert");
-        alertBox.style.visibility = "hidden";
+      const alertBox = document.getElementById("alert");
+      alertBox.style.visibility = "hidden";
       }
   </script>
   </body>
