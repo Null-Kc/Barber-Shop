@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Barber Shop</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+      import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAqSj6uOMqFuL3YoUxdgHZUil75ebPkNlU",
+        authDomain: "agendamento-390700.firebaseapp.com",
+        projectId: "agendamento-390700",
+        storageBucket: "agendamento-390700.appspot.com",
+        messagingSenderId: "1093556016847",
+        appId: "1:1093556016847:web:e53f4c27cd2a21bfe449ba",
+        measurementId: "G-L13DEMJPWB"
+      };
+
+      
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      var availability = true;
+
+      // Get a reference to the Firestore database
+      const db = getFirestore();
+
+      async function checkAvailability() {
+        try {
+            const day_wanted = document.getElementById("dayInput").value;
+            const time_wanted = document.getElementById("timeInput").value;
+            const querySnapshot = await getDocs(collection(db, "Horarios"));
+            var hasDuplicates = false; // Flag to track duplicates
+
+            querySnapshot.forEach((doc) => {
+              if (day_wanted === doc.data().day && time_wanted >= doc.data().time && time_wanted <= doc.data().timeEnd) {
+                hasDuplicates = true;
+              }
+            });
+
+            return !hasDuplicates;
+        } catch (error) {
+            console.error("Error retrieving contacts: ", error);
+            throw error;
+        }
+      }
+
+      // Function to add data to Firestore
+      async function addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal) {
+          try {
+              const docRef = await addDoc(collection(db, "Horarios"), {
+                  name: name,
+                  phoneNumber: phoneNumber,
+                  servico: servico,
+                  day: day,
+                  time: time,
+                  timeEnd: timeEnd,
+                  valorTotal: valorTotal
+              });
+              console.log("Document added with ID: ", docRef.id);
+              
+          } catch (error) {
+              console.error("Error adding document: ", error);
+          }
+      }
+
+      // Call the function to add data when the form is submitted
+      document.getElementById("contactForm").addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const Apagar = document.getElementById("reset");
+          const name = document.getElementById("nomeInput").value;
+          const phoneNumber = document.getElementById("phoneNumberInput").value;
+          const servico = checkSelection();
+          const day = document.getElementById("dayInput").value;
+          const time = document.getElementById("timeInput").value;
+          var valorTotal = document.getElementById("valor_total").innerHTML;
+          valorTotal = parseInt(valorTotal);
+          
+          var timeEnd = time.split('');
+          timeEnd[1] = parseInt(timeEnd[1]) + 2;
+          timeEnd = timeEnd.join('');
+         
+          try {
+              const isAvailable = await checkAvailability();
+
+              if (isAvailable) {
+                  addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);
+                  Apagar.click();
+              } else {
+                const alertBox = document.getElementById("alert");
+                alertBox.style.visibility = "visible";
+              }
+          } catch (error) {
+              console.error("Error checking availability: ", error);
+          }
+      });
+
+      
+  </script>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <header class="cabecalho">
+          <h1 class="logo_container">
+            <img src="./public/imagens/logo.png" class="logo" />
+          </h1>
+          <h1 class="bem_vindo">bem vindo</h1>
+          <h2 class="faca_ja_seu_agendamento">Faca já seu agendamento</h2>
+        </header>
+        
+        <form class="container_form" id="contactForm">
+          <div class="input_container">
+            <label for="nomeInput" class="texto_input_padrao">Digite seu nome:</label>
+            <input type="text" class="input_padrao" id="nomeInput" name="nomeInput" placeholder="João Maciel Da Silva" required>
+          </div>
+
+          <div class="input_container">
+            <label for="phoneNumberInput:" class="texto_input_padrao">Digite seu telefone de contato:</label>
+            <input type="number" class="input_padrao" id="phoneNumberInput" name="phoneNumberInput:" placeholder="(88) 99945-1245" required>
+          </div>
+
+          <div class="input_container">
+            <label for="dayInput" class="texto_input_padrao">Dia desejado:</label>
+            <input type="date" class="input_padrao" id="dayInput" name="dayInput:" placeholder="00 / 00 / 00" required>
+          </div>
+
+          <div class="input_container">
+            <label for="timeInput" class="texto_input_padrao">Hora desejada:</label>
+            <input type="time" class="input_padrao" id="timeInput" name="timeInput" placeholder="00:00" required>
+          </div>
+
+          <h3 class="texto_box_servicos">Selecione o que vc deseja:</h3>
+
+          <div class="container_servicos">
+            <div class="box_servico">
+              <label for="cabelo" class="texto_servico">Cabelo</label>
+              <input class="servico" type="checkbox" id="cabelo" name="servicos" value="10" onchange="toggleCheckbox(this)">
+            </div>
+
+            <div class="box_servico">
+              <label for="barba" class="texto_servico">Barba</label>
+              <input class="servico" type="checkbox" id="barba" name="servicos" value="7" onchange="toggleCheckbox(this)">
+            </div>
+            
+            <div class="box_servico">
+              <label for="sobrancelha" class="texto_servico">Sobrancelha</label>
+              <input class="servico" type="checkbox" id="sobrancelha" name="servicos" value="5" onchange="toggleCheckbox(this)">
+            </div>
+
+            <div class="box_servico">
+              <label for="tudo" class="texto_servico">Tudo</label>
+              <input class="servico" type="checkbox" id="tudo" name="servicos" value="22" onchange="toggleCheckbox(this)">
+            </div>
+
+            <div class="box_servico">
+              <label for="outros" class="texto_servico">outros</label>
+              <input class="servico" type="checkbox" id="outros" name="servicos" value="Nao Disponivel" onchange="toggleCheckbox(this)">
+            </div>
+          </div>
+
+          <div class="box_valor_Servirco">
+            <h3 class="texto_valor_Servirco">Serviços:</h3>
+            <div>
+              <h3 id="rs_servico" class="valor_Servirco">R$ </h3>
+              <h3 id="valor_servico" class="valor_Servirco"></h3>
+            </div>
+          </div>
+          
+          <div class="box_taxa">
+            <h3 class="texto_taxa">+ Taxa:</h3>
+            <h3 class="valor_taxa">R$ 1</h3>
+          </div>
+          
+          <div class="box_preco">
+            <h3 class="texto_total">Total: </h3>
+            <div>
+              <h3 id="rs_total" class="valor_preco">R$ </h3>
+              <h3 id="valor_total" class="valor_preco"></h3>
+            </div>
+            
+          </div>
+
+          <div class="box_botao">
+            <button class="botao_agendar" type="submit">
+              <p class="texto_agendar">Agendar</p>
+            </button>
+          </div>
+
+          <button style="display: none;" id="reset" type="reset"></button>
+        </form>
+        
+        <div id="alert" class="alert" onclick="hiddenAlertBox()">
+          <h3 class="textoAlert">
+            Sinto muito mais esse horario ja esta ocupado
+            <br>
+            <br>
+            altere o horario ou entre em contato.
+            <br>
+            <br>
+            <span class="textoAlertHelp">Clique na tela para sair</span>
+          </h3>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function checkSelection() {
+          var checkboxes = document.getElementsByName('servicos');
+          
+          var selectedCheckbox = null;
+          
+          checkboxes.forEach(function(checkbox) {
+              if (checkbox.checked) {
+                  selectedCheckbox = checkbox.id;
+              }
+          });
+          
+          if (selectedCheckbox === null) {
+            alert("No checkbox selected.");
+          }
+          else{
+            return selectedCheckbox;
+          }
+      }
+  </script>
+
+  <script>
+      function toggleCheckbox(currentCheckbox) {
+  
+          var checkboxes = document.getElementsByName('servicos');
+          const valorServico = document.getElementById("valor_servico");
+          const valorTotal = document.getElementById("valor_total");
+          const rsServico = document.getElementById("rs_servico");
+          const rsTotal = document.getElementById("rs_total");
+          
+          valorServico.innerHTML= parseInt(currentCheckbox.value);
+          valorTotal.innerHTML= (parseInt(currentCheckbox.value) + 1);
+          
+          if(currentCheckbox.value == "Nao Disponivel"){
+            
+
+            valorServico.innerHTML = currentCheckbox.value;
+            valorTotal.innerHTML = "Entre em contato";
+            rsServico.innerHTML = "";
+            rsTotal.innerHTML = "";
+          }
+          else{
+            rsServico.innerHTML = "R$";
+            rsTotal.innerHTML = "R$";
+          }
+
+          checkboxes.forEach(function(checkbox) {
+              if (checkbox !== currentCheckbox) {
+                  checkbox.checked = false;
+              }
+          });
+      }
+  </script>
+  <script>
+    function hiddenAlertBox(){
+        const alertBox = document.getElementById("alert");
+        alertBox.style.visibility = "hidden";
+      }
+  </script>
+  </body>
+</html>
