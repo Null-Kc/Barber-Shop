@@ -9,6 +9,15 @@
     <title>Barber Shop</title>
 
     <link rel="stylesheet" href="styles.css">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZSFGFR9VEZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZSFGFR9VEZ');
+    </script>
 
     <script type="module">
       // Import the functions you need from the SDKs you need
@@ -244,24 +253,22 @@
       }
     }
   </script>
+  <script>
+    var telefoneInput = document.getElementById('phoneNumberInput');
 
-<script>
-  var telefoneInput = document.getElementById('phoneNumberInput');
+    telefoneInput.addEventListener('blur', function() {
+      var numero = telefoneInput.value.replace(/\D/g, '');
+      var formatado;
 
-  telefoneInput.addEventListener('blur', function() {
-    var numero = telefoneInput.value.replace(/\D/g, '');
-    var formatado;
+      if (numero.length === 11) {
+        formatado = numero.substr(0, 2) + ' ' + numero.substr(2, 1) + ' ' + numero.substr(3, 4) + '-' + numero.substr(7, 4);
+      } else {
+        formatado = numero;
+      }
 
-    if (numero.length === 11) {
-      formatado = numero.substr(0, 2) + ' ' + numero.substr(2, 1) + ' ' + numero.substr(3, 4) + '-' + numero.substr(7, 4);
-    } else {
-      formatado = numero;
-    }
-
-    telefoneInput.value = formatado;
-  });
-</script>
-
+      telefoneInput.value = formatado;
+    });
+  </script>
   <script>
     function toggleCheckbox(currentCheckbox) {
       var checkboxes = document.getElementsByName('servicos');
@@ -299,5 +306,6 @@
       alertBox.style.visibility = "hidden";
       }
   </script>
+  
   </body>
 </html>
