@@ -98,6 +98,10 @@
               if (isAvailable) {
                   addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);
                   Apagar.click();
+                  const textoAlet = document.querySelector("#texto_alert");
+                  textoAlet.innerHTML = "Agendamento Confirmado <br><br> Press";
+                  const alertBox = document.getElementById("alert");
+                  alertBox.style.visibility = "visible";
               } else {
                 const alertBox = document.getElementById("alert");
                 alertBox.style.visibility = "visible";
@@ -147,7 +151,7 @@
           <div class="container_servicos">
             <div class="box_servico">
               <label for="cabelo" class="texto_servico">Cabelo</label>
-              <input class="servico" type="checkbox" id="cabelo" name="servicos" value="10" onchange="toggleCheckbox(this)">
+              <input class="servico" type="checkbox" id="cabelo" name="servicos" value="10" onchange="toggleCheckbox(this)" checked>
             </div>
 
             <div class="box_servico">
@@ -175,7 +179,7 @@
             <h3 class="texto_valor_Servirco">Serviços:</h3>
             <div>
               <h3 id="rs_servico" class="valor_Servirco">R$ </h3>
-              <h3 id="valor_servico" class="valor_Servirco"></h3>
+              <h3 id="valor_servico" class="valor_Servirco">10</h3>
             </div>
           </div>
           
@@ -188,7 +192,7 @@
             <h3 class="texto_total">Total: </h3>
             <div>
               <h3 id="rs_total" class="valor_preco">R$ </h3>
-              <h3 id="valor_total" class="valor_preco"></h3>
+              <h3 id="valor_total" class="valor_preco">11</h3>
             </div>
             
           </div>
@@ -203,14 +207,14 @@
         </form>
         
         <div id="alert" class="alert" onclick="hiddenAlertBox()">
-          <h3 class="textoAlert">
+          <h3 id="texto_alert" class="textoAlert">
             Sinto muito mais esse horario ja esta ocupado
             <br>
             <br>
             altere o horario ou entre em contato.
             <br>
             <br>
-            <span class="textoAlertHelp">Clique na tela para sair</span>
+            <span class="textoAlertHelp">Press</span>
           </h3>
         </div>
       </div>
