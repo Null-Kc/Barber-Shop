@@ -1,0 +1,368 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  background-color: #686868;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  text-align: center 
+}
+
+
+.logo_container {
+  margin: auto;
+  width: 100%;
+  max-width: 320px;
+}
+
+.logo{
+  padding: 20px 20px;
+  width: 100%;
+  max-width: 245px;
+}
+
+.bem_vindo {
+  font-size: 40px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  padding-bottom: 25px;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.faca_ja_seu_agendamento {
+  font-size: 25px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  text-align: center;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.container_form{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center; 
+  text-align: center;
+  margin: auto; 
+  width: 90vw; 
+  max-width: 900px;
+  padding: 0 20px 50px 20px; 
+}
+
+.input_container{
+  width: 100%;
+  max-width: 338px;
+  height: 111px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  text-align: center;
+  margin: 30px 10px auto 10px;
+}
+
+.texto_input_padrao{
+  font-size: 20px;
+  font-weight: lighter;
+  padding-bottom: 20px;
+  color: #FFFFFF;
+  text-align: left;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.input_padrao{
+    height: 70px;
+    border-radius: 20px;
+    border: 3px#FFFFFF solid;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: lighter;
+    color: #FFFFFF;
+    text-align: left;
+    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+}
+
+.input_padrao:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+  }
+
+.input_padrao::placeholder{
+  font-size: 20px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  text-align: left;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+}
+
+.texto_box_servicos{
+  width: 1050px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 20px;
+  color: #FFFFFF;
+  text-align: center;
+  margin-top: 30px;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.container_servicos{
+  width: 100%;
+  max-width: 1100px;
+  flex-wrap: wrap;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  text-align: center;
+  align-items: center;
+  border-radius: 20px;
+  margin: 20px auto;
+}
+
+.box_servico{
+  margin: 20px 10px;
+  border-radius: 20px;
+  border: 3px solid #686868;
+  background-color: #FFFFFF;
+  width: 100%;
+  max-width: 338px;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  padding: 15px;
+}
+
+.texto_servico{
+  font-size: 20px;
+  font-weight: bold;
+  color: #686868;
+  align-items: center;
+  text-align: center;
+  background-color: #FFFFFF;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.servico{
+  all: unset;
+  border: 1px solid #686868;
+  width: 35px;
+  height: 35px;
+  margin-top: -2px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.servico:checked {
+  background-color: #686868;
+}
+
+.box_valor_Servirco{
+  width: 100%;
+  max-width: 1100px;
+  margin: auto ;
+  width: 100%;
+  display: flex;
+  padding: 0 40px;
+  flex-direction: row;
+  justify-content: space-between; 
+}
+
+.texto_valor_Servirco{
+  font-size: 10px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  align-items: center;
+  text-align: center;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.valor_Servirco{
+  display: inline-block;
+  font-size: 10px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  align-items: center;
+  text-align: center;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+}
+
+.box_taxa{
+  width: 100%;
+  max-width: 1100px;
+  margin: auto ;
+  width: 100%;
+  display: flex;
+  padding: 0 40px;
+  flex-direction: row;
+  justify-content: space-between; 
+}
+
+.texto_taxa{
+  font-size: 10px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  align-items: center;
+  text-align: center;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.valor_taxa{
+  font-size: 10px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  align-items: center;
+  text-align: center;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+}
+
+.box_preco{
+  
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+}
+
+.texto_total{
+  font-size: 30px;
+  font-weight: lighter;
+  color: #FFFFFF;
+  align-items: center;
+  text-align: center;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+
+
+.valor_preco{
+  font-size: 30px;
+  display: inline-block;
+  font-weight: bold;
+  color: #FFFFFF;
+  align-items: center;
+  text-align: center;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+}
+
+.box_botao{
+  width: 100%;
+  max-width: 338px;
+  margin: auto ;
+  width: 100%;
+  display: flex;
+}
+
+.botao_agendar{
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center; 
+  text-align: center;
+  align-items: center;
+  margin-top: 70px;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 64px;
+}
+
+.texto_agendar{
+  font-size: 30px;
+  font-weight: bold;
+  color: #686868;
+  text-align: center;
+  background-color: #FFFFFF;
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+.alert{
+  position: fixed;
+  background-color: #686868;
+  box-shadow: rgba(255, 255, 255, 0.669) 0px 54px 55px, rgba(255, 255, 255, 0.669) 0px -12px 30px, rgba(255, 255, 255, 0.669) 0px 4px 6px, rgba(255, 255, 255, 0.669) 0px 12px 13px, rgba(255, 255, 255, 0.669) 0px -3px 5px;
+  border-radius: 30px 30px;
+  width: 90%;
+  height: 50%;
+  bottom: 25vh;
+  left: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility:hidden;
+}
+
+.textoAlert{
+  font-size: 30px;
+  font-weight: bold;
+  background-color: transparent;
+  color: #FFFFFF;
+  
+}
+
+.textoAlertHelp{
+  font-size: 12px;
+}
+
+@media (max-width: 839px) {
+  .container_servicos{
+    max-width: 380px;
+  }
+  .texto_box_servicos{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .box_valor_Servirco{
+    max-width: 380px;
+    margin: auto;
+  }
+  
+  .box_taxa{
+    max-width: 380px;
+    margin: auto;
+  }
+  
+  .box_preco{
+    max-width: 380px;
+    margin: auto;
+  }
+  .textoAlert{
+    font-size: 20px;
+    padding: 0 20px;
+  }
+}
+@media (max-width: 600px) {
+  .input_container{
+    margin: 40px auto 0 auto;
+  }
+  .container_form{
+    width: 95%;
+    margin: auto;
+  }
+
+  .texto_box_servicos{
+    text-align: center;
+  }
+  .box_valor_Servirco{
+    padding: 0 20px;
+  }
+
+  .box_taxa{
+    padding: 0 20px;
+  }
+  .box_preco{
+    padding: 0 20px;
+  }
+  
+}
