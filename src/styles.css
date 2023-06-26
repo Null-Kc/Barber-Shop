@@ -1,18 +1,17 @@
 *{
   margin: 0;
-  padding: 0;
-  border: none;
+  border: 0;
+  font-family: Arial, Helvetica, sans-serif; 
   box-sizing: border-box;
-  background-color: #686868;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center; 
-  text-align: center 
+  text-align: center;
+  background-color: #686868;
 }
-
 
 .logo_container {
   margin: auto;
@@ -79,6 +78,7 @@
     height: 70px;
     border-radius: 20px;
     border: 3px#FFFFFF solid;
+    background-color: #686868;
     padding: 10px;
     font-size: 20px;
     font-weight: lighter;
@@ -176,22 +176,21 @@
 }
 
 .texto_valor_Servirco{
-  font-size: 10px;
+  font-size: 14px;
   font-weight: lighter;
   color: #FFFFFF;
   align-items: center;
   text-align: center;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
 
 .valor_Servirco{
   display: inline-block;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: lighter;
   color: #FFFFFF;
   align-items: center;
   text-align: center;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+
 }
 
 .box_taxa{
@@ -206,25 +205,22 @@
 }
 
 .texto_taxa{
-  font-size: 10px;
+  font-size: 14px;
   font-weight: lighter;
   color: #FFFFFF;
   align-items: center;
   text-align: center;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
 
 .valor_taxa{
-  font-size: 10px;
+  font-size: 14px;
   font-weight: lighter;
   color: #FFFFFF;
   align-items: center;
   text-align: center;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
 }
 
 .box_preco{
-  
   width: 100%;
   max-width: 1100px;
   margin: auto;
@@ -237,14 +233,11 @@
 
 .texto_total{
   font-size: 30px;
-  font-weight: lighter;
+  font-weight: bold;
   color: #FFFFFF;
   align-items: center;
   text-align: center;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
-
-
 
 .valor_preco{
   font-size: 30px;
@@ -253,7 +246,6 @@
   color: #FFFFFF;
   align-items: center;
   text-align: center;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
 }
 
 .box_botao{
@@ -342,6 +334,7 @@
     padding: 0 20px;
   }
 }
+
 @media (max-width: 600px) {
   .input_container{
     margin: 40px auto 0 auto;
