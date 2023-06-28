@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  background-color: #686868;
+}
+
+.card {
+  position: relative;
+  border: 1px solid #686868;
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  display: flex; /* Adicionado */
+  align-items: center; /* Adicionado */
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card p {
+  font-size: 16px;
+  padding-bottom: 10px;
+  color: #686868;
+  font-weight: bold;
+  background-color: #FFFFFF;
+}
+
+.card .delete-icon {
+  position: absolute;
+  top: 50%;
+  right: 60px; /* Alterado */
+  transform: translateY(-50%); /* Adicionado */
+  color: #dc3545;
+  background-color: #FFFFFF;
+  font-size: 50px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.card .delete-icon:hover {
+  color: #c82333;
+}
+
+.card .icon-container {
+  margin-left: auto; /* Adicionado */
+  display: flex; /* Adicionado */
+  align-items: center; /* Adicionado */
+}
+
+.card .icon-container button {
+  margin-left: 10px; /* Adicionado para espaçamento entre os ícones */
+}
+
+.whatsapp{
+  width: 50px;
+  position: absolute;
+  top: 37%;
+  right: 150px;
+  background-color: #FFFFFF;
+}
+.title {
+  font-size: 40px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif; 
+}
+
+.box_agenda {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  flex-direction: row;
+  justify-content: center; 
+}
+
+.day-section {
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.day-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
