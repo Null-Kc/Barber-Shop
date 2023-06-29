@@ -1,7 +1,7 @@
 *{
   margin: 0;
   border: 0;
-  font-family: Arial, Helvetica, sans-serif; 
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
   box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center; 
   text-align: center;
-  background-color: #686868;
+  background-color: #000000;
 }
 
 .logo_container {
@@ -23,6 +23,7 @@
   padding: 20px 20px;
   width: 100%;
   max-width: 245px;
+  border-radius: 50%;
 }
 
 .bem_vindo {
@@ -31,7 +32,6 @@
   color: #FFFFFF;
   text-align: center;
   padding-bottom: 25px;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
 
 .faca_ja_seu_agendamento {
@@ -39,7 +39,6 @@
   font-weight: lighter;
   color: #FFFFFF;
   text-align: center;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
 
 .container_form{
@@ -70,21 +69,19 @@
   font-weight: lighter;
   padding-bottom: 20px;
   color: #FFFFFF;
-  text-align: left;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+  text-align: left; 
 }
 
 .input_padrao{
     height: 70px;
     border-radius: 20px;
     border: 3px#FFFFFF solid;
-    background-color: #686868;
+    background-color: #000000;
     padding: 10px;
     font-size: 20px;
     font-weight: lighter;
     color: #FFFFFF;
     text-align: left;
-    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
 }
 
 .input_padrao:focus {
@@ -97,7 +94,6 @@
   font-weight: lighter;
   color: #FFFFFF;
   text-align: left;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
 }
 
 .texto_box_servicos{
@@ -109,7 +105,6 @@
   color: #FFFFFF;
   text-align: center;
   margin-top: 30px;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
 
 .container_servicos{
@@ -129,7 +124,7 @@
 .box_servico{
   margin: 20px 10px;
   border-radius: 20px;
-  border: 3px solid #686868;
+  border: 3px solid #000000;
   background-color: #FFFFFF;
   width: 100%;
   max-width: 338px;
@@ -143,16 +138,15 @@
 .texto_servico{
   font-size: 20px;
   font-weight: bold;
-  color: #686868;
+  color: #000000;
   align-items: center;
   text-align: center;
   background-color: #FFFFFF;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
 
 .servico{
   all: unset;
-  border: 1px solid #686868;
+  border: 1px solid #000000;
   width: 35px;
   height: 35px;
   margin-top: -2px;
@@ -161,7 +155,7 @@
 }
 
 .servico:checked {
-  background-color: #686868;
+  background-color: #000000;
 }
 
 .box_valor_Servirco{
@@ -273,15 +267,14 @@
 .texto_agendar{
   font-size: 30px;
   font-weight: bold;
-  color: #686868;
+  color: #000000;
   text-align: center;
   background-color: #FFFFFF;
-  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 }
 
 .alert{
   position: fixed;
-  background-color: #686868;
+  background-color: #000000;
   box-shadow: rgba(255, 255, 255, 0.669) 0px 54px 55px, rgba(255, 255, 255, 0.669) 0px -12px 30px, rgba(255, 255, 255, 0.669) 0px 4px 6px, rgba(255, 255, 255, 0.669) 0px 12px 13px, rgba(255, 255, 255, 0.669) 0px -3px 5px;
   border-radius: 30px 30px;
   width: 90%;
@@ -304,6 +297,10 @@
 
 .textoAlertHelp{
   font-size: 12px;
+}
+
+.zap{
+  width: 50px;
 }
 
 @media (max-width: 839px) {

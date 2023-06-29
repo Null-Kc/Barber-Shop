@@ -89,12 +89,20 @@
       valorTotal = parseInt(valorTotal);
 
       var timeEnd = time.split('');
-      timeEnd[1] = parseInt(timeEnd[1]) + 2;
-      timeEnd = timeEnd.join('');
+
+      if(timeEnd[1] == 9){
+        timeEnd[0] = parseInt(timeEnd[0]) + 1;
+        timeEnd[1] = 0;
+        timeEnd = timeEnd.join('');
+      }
+      else{
+        timeEnd[1] = parseInt(timeEnd[1]) + 1;
+        timeEnd = timeEnd.join('');
+      }
 
       try {
         const isAvailable = await checkAvailability();
-
+        console.log(isAvailable)
         if (isAvailable) {
 
           addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);
@@ -110,6 +118,8 @@
 
           toggleCheckbox(cabeloReset);
         } else {
+          const textoAlet = document.querySelector("#texto_alert");
+          textoAlet.innerHTML = "Sinto muito mais esse horario ja esta ocupado<br><br>altere o horario ou entre em contato.<br><br><a href=https://api.whatsapp.com/send?phone=5588992664038 target=_blank>  <img class=zap src=./assets/whatsapp-logo.png alt=logo zap></a><br><br><span class=textoAlertHelp>Press</span>";
           const alertBox = document.getElementById("alert");
           alertBox.style.visibility = "visible";
         }
@@ -117,20 +127,20 @@
         console.error("Erro: ", error);
       }
       });
-  </script>
+    </script>
   </head>
   <body>
     <main class="container">
       <header class="cabecalho">
 
         <h1 class="logo_container">
-          <img src="./assets/logo.png" class="logo" />
+          <img src="./assets/vitin.jpeg" alt="logo" class="logo" />
         </h1>
         
         <h1 class="bem_vindo">bem vindo</h1>
 
         <h2 class="faca_ja_seu_agendamento">Faca já seu agendamento</h2>
-      
+    
       </header>
       
       <form class="container_form" id="contactForm">
@@ -220,6 +230,11 @@
           <br>
           <br>
           altere o horario ou entre em contato.
+          <br>
+          <br>
+          <a href="https://api.whatsapp.com/send?phone=5588992664038" target="_blank">
+            <img class="zap" src="./assets/whatsapp-logo.png" alt="logo zap">
+          </a>
           <br>
           <br>
           <span class="textoAlertHelp">Press</span>

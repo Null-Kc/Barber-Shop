@@ -3,12 +3,12 @@
   padding: 0;
   border: none;
   box-sizing: border-box;
-  background-color: #686868;
+  background-color: #000000;
 }
 
 .card {
   position: relative;
-  border: 1px solid #686868;
+  border: 1px solid #000000;
   border-radius: 20px;
   padding: 20px;
   width: 100%;
@@ -28,16 +28,18 @@
 .card p {
   font-size: 16px;
   padding-bottom: 10px;
-  color: #686868;
+  color: #000000;
   font-weight: bold;
   background-color: #FFFFFF;
 }
 
-.icon-container{
+.icon-container {
   justify-content: space-between;
   width: 120px;
   background-color: #FFFFFF;
+  margin-left: 10px;
 }
+
 .card .delete-icon {
   position: relative;
   background-color: #FFFFFF;
@@ -54,13 +56,9 @@
 }
 
 .card .icon-container {
-  margin-left: auto; /* Adicionado */
-  display: flex; /* Adicionado */
-  align-items: center; /* Adicionado */
-}
-
-.card .icon-container button {
-  margin-left: 10px; /* Adicionado para espaçamento entre os ícones */
+  margin-left: auto; 
+  display: flex; 
+  align-items: center;
 }
 
 .card a{
@@ -111,6 +109,10 @@
 
 @media (max-width: 370px){
   .card p{
-    font-size: 12px;
+    font-size: 13px;
+  }
+
+  .icon-container{
+    width: 100px;
   }
 }
