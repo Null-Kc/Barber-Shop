@@ -13,13 +13,13 @@
       
         // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyAqSj6uOMqFuL3YoUxdgHZUil75ebPkNlU",
-            authDomain: "agendamento-390700.firebaseapp.com",
-            projectId: "agendamento-390700",
-            storageBucket: "agendamento-390700.appspot.com",
-            messagingSenderId: "1093556016847",
-            appId: "1:1093556016847:web:e53f4c27cd2a21bfe449ba",
-            measurementId: "G-L13DEMJPWB"
+          piKey: "AIzaSyCxXkHY5bOQTCoOL12bbtT98x9MUlLoH-o",
+          authDomain: "barbearia-8b93d.firebaseapp.com",
+          projectId: "barbearia-8b93d",
+          storageBucket: "barbearia-8b93d.appspot.com",
+          messagingSenderId: "751166960100",
+          appId: "1:751166960100:web:9a7a4cadb753bde13257f1",
+          measurementId: "G-HJM3S5CCR9"
         };
       
         // Initialize Firebase
@@ -112,7 +112,7 @@
         // Obtém os documentos da coleção "Horarios" e cria os cards
         getDocs(collection(db, "Barbearia"))
           .then((querySnapshot) => {
-              const cardsByDay = {}; // Objeto para armazenar os cards agrupados por data.day
+              const cardsByDay = {};
       
               querySnapshot.forEach((doc) => {
                   const documentId = doc.id;

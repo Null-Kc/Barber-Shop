@@ -10,13 +10,13 @@
 
     <link rel="stylesheet" href="styles.css">
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZSFGFR9VEZ"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJM3S5CCR9"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'G-ZSFGFR9VEZ');
+    
+      gtag('config', 'G-HJM3S5CCR9');
     </script>
 
     <script type="module">
@@ -25,57 +25,86 @@
       import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
       const firebaseConfig = {
-        apiKey: "AIzaSyAqSj6uOMqFuL3YoUxdgHZUil75ebPkNlU",
-        authDomain: "agendamento-390700.firebaseapp.com",
-        projectId: "agendamento-390700",
-        storageBucket: "agendamento-390700.appspot.com",
-        messagingSenderId: "1093556016847",
-        appId: "1:1093556016847:web:e53f4c27cd2a21bfe449ba",
-        measurementId: "G-ZSFGFR9VEZ"
+        apiKey: "AIzaSyCxXkHY5bOQTCoOL12bbtT98x9MUlLoH-o",
+        authDomain: "barbearia-8b93d.firebaseapp.com",
+        projectId: "barbearia-8b93d",
+        storageBucket: "barbearia-8b93d.appspot.com",
+        messagingSenderId: "751166960100",
+        appId: "1:751166960100:web:9a7a4cadb753bde13257f1",
+        measurementId: "G-HJM3S5CCR9"
       };
 
+      // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
 
       const db = getFirestore();
 
+      var timeEnd = "";
+
       async function checkAvailability() {
-      try {
-        const day_wanted = document.getElementById("dayInput").value;
-        const time_wanted = document.getElementById("timeInput").value;
-        const querySnapshot = await getDocs(collection(db, "Barbearia"));
-        var hasDuplicates = false; 
+        try {
+          const day_wanted = document.getElementById("dayInput").value;
+          const time_wanted = document.getElementById("timeInput").value;
+          const querySnapshot = await getDocs(collection(db, "Barbearia"));
+          var hasDuplicates = false; 
 
-        querySnapshot.forEach((doc) => {
-          if (day_wanted === doc.data().day && time_wanted >= doc.data().time && time_wanted <= doc.data().timeEnd) {
-            hasDuplicates = true;
-          }
-        });
+          querySnapshot.forEach((doc) => {
+            if (day_wanted === doc.data().day && time_wanted >= doc.data().time && time_wanted <= doc.data().timeEnd) {
+              hasDuplicates = true;
+            }
+          });
 
-        return !hasDuplicates;
-      } catch (error) {
-        console.error("Erro: ", error);
-        throw error;
-      }
-      }
+          return !hasDuplicates;
+        } catch (error) {
+          console.error("Erro: ", error);
+          throw error;
+        }
+        }
 
       async function addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal) {
-      try {
-        const docRef = await addDoc(collection(db, "Barbearia"), {
-          name: name,
-          phoneNumber: phoneNumber,
-          servico: servico,
-          day: day,
-          time: time,
-          timeEnd: timeEnd,
-          valorTotal: valorTotal
-        });
-        console.log("Agendamento ID: ", docRef.id);
-      } catch (error) {
-        console.error("Erro: ", error);
+        try {
+          const docRef = await addDoc(collection(db, "Barbearia"), {
+            name: name,
+            phoneNumber: phoneNumber,
+            servico: servico,
+            day: day,
+            time: time,
+            timeEnd: timeEnd,
+            valorTotal: valorTotal
+          });
+          console.log("Agendamento ID: ", docRef.id);
+        } catch (error) {
+          console.error("Erro: ", error);
+        }
       }
-      }
+      
+      function timeCheckAvailability(time){
+        var timeAvailability = true;
 
+        var timeEndClient = time.split('');
+        var timecheck = time.split('');
+
+        var timezero = parseInt(timecheck[0]);
+        var timeum = parseInt(timecheck[1])
+
+        if(timezero == 0 && timeum < 9 || timezero == 2){
+          timeAvailability =  false;
+        }
+
+        if(timeEndClient[1] == 9){
+          timeEndClient[0] = parseInt(timeEndClient[0]) + 1;
+          timeEndClient[1] = 0;
+          timeEndClient = timeEndClient.join('');
+        }
+        else{
+          timeEndClient[1] = parseInt(timeEndClient[1]) + 1;
+          timeEndClient = timeEndClient.join('');
+        }
+        
+        timeEnd = timeEndClient;
+        return timeAvailability;
+      }
 
       document.getElementById("contactForm").addEventListener("submit", async function (event) {
       event.preventDefault();
@@ -88,41 +117,42 @@
       var valorTotal = document.getElementById("valor_total").innerHTML;
       valorTotal = parseInt(valorTotal);
 
-      var timeEnd = time.split('');
-
-      if(timeEnd[1] == 9){
-        timeEnd[0] = parseInt(timeEnd[0]) + 1;
-        timeEnd[1] = 0;
-        timeEnd = timeEnd.join('');
-      }
-      else{
-        timeEnd[1] = parseInt(timeEnd[1]) + 1;
-        timeEnd = timeEnd.join('');
-      }
-
       try {
-        const isAvailable = await checkAvailability();
-        
-        if (isAvailable) {
+        var timeCheck = timeCheckAvailability(time);
+      
+        if(timeCheck == true){
+          const isAvailable = await checkAvailability();
 
-          addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);
+          if (isAvailable) {
 
-          Apagar.click();
+            addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);
 
+            Apagar.click();
+
+            const textoAlet = document.querySelector("#texto_alert");
+            textoAlet.innerHTML = "Agendamento Confirmado <br><br> Press";
+            const alertBox = document.getElementById("alert");
+            alertBox.style.visibility = "visible";
+
+            const cabeloReset = document.querySelector("#cabelo");
+
+            toggleCheckbox(cabeloReset);
+          } 
+            
+          else {
+            const textoAlet = document.querySelector("#texto_alert");
+            textoAlet.innerHTML = "Sinto Muito Mais Esse Horario Ja Esta Ocupado<br><br>Altere o Horario ou Entre em Contato.<br><br><a href=https://api.whatsapp.com/send?phone=5588992664038 target=_blank>  <img class=zap src=./assets/whatsapp-logo.png alt=logo zap></a><br><br><span class=textoAlertHelp>Press</span>";
+            const alertBox = document.getElementById("alert");
+            alertBox.style.visibility = "visible";
+          }
+        }
+        else {
           const textoAlet = document.querySelector("#texto_alert");
-          textoAlet.innerHTML = "Agendamento Confirmado <br><br> Press";
-          const alertBox = document.getElementById("alert");
-          alertBox.style.visibility = "visible";
-
-          const cabeloReset = document.querySelector("#cabelo");
-
-          toggleCheckbox(cabeloReset);
-        } else {
-          const textoAlet = document.querySelector("#texto_alert");
-          textoAlet.innerHTML = "Sinto muito mais esse horario ja esta ocupado<br><br>altere o horario ou entre em contato.<br><br><a href=https://api.whatsapp.com/send?phone=5588992664038 target=_blank>  <img class=zap src=./assets/whatsapp-logo.png alt=logo zap></a><br><br><span class=textoAlertHelp>Press</span>";
+          textoAlet.innerHTML = "Nao funcionamos nesse horario <br><br>Nosso Horario de Funcionamento E: <br><br> Das 09:00 as 20:00 <br><br>Altere o Horario ou Entre em Contato.<br><br><a href=https://api.whatsapp.com/send?phone=5588992664038 target=_blank>  <img class=zap src=./assets/whatsapp-logo.png alt=logo zap></a><br><br><span class=textoAlertHelp>Press</span>";
           const alertBox = document.getElementById("alert");
           alertBox.style.visibility = "visible";
         }
+        
       } catch (error) {
         console.error("Erro: ", error);
       }
