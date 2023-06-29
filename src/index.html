@@ -43,7 +43,7 @@
       try {
         const day_wanted = document.getElementById("dayInput").value;
         const time_wanted = document.getElementById("timeInput").value;
-        const querySnapshot = await getDocs(collection(db, "Horarios"));
+        const querySnapshot = await getDocs(collection(db, "Barbearia"));
         var hasDuplicates = false; 
 
         querySnapshot.forEach((doc) => {
@@ -61,7 +61,7 @@
 
       async function addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal) {
       try {
-        const docRef = await addDoc(collection(db, "Horarios"), {
+        const docRef = await addDoc(collection(db, "Barbearia"), {
           name: name,
           phoneNumber: phoneNumber,
           servico: servico,
@@ -102,7 +102,7 @@
 
       try {
         const isAvailable = await checkAvailability();
-        console.log(isAvailable)
+        
         if (isAvailable) {
 
           addData(name, phoneNumber, servico, day, time, timeEnd, valorTotal);

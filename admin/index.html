@@ -99,7 +99,7 @@
           card.style.opacity = 0.5; // Altera a opacidade do card durante a exclusão
       
           // Exclui o documento do Firestore
-          deleteDoc(doc(db, "Horarios", documentId))
+          deleteDoc(doc(db, "Barbearia", documentId))
             .then(() => {
               card.remove();
             })
@@ -110,7 +110,7 @@
         }
       
         // Obtém os documentos da coleção "Horarios" e cria os cards
-        getDocs(collection(db, "Horarios"))
+        getDocs(collection(db, "Barbearia"))
           .then((querySnapshot) => {
               const cardsByDay = {}; // Objeto para armazenar os cards agrupados por data.day
       
