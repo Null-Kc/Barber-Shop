@@ -351,6 +351,11 @@
   .box_taxa{
     padding: 0 20px;
   }
+
+  .alert{
+    height: 90vh;
+    bottom: 5vh;
+  }
   .box_preco{
     padding: 0 20px;
   }

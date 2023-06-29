@@ -39,7 +39,7 @@ function toggleCheckbox(currentCheckbox) {
   const rsTotal = document.getElementById("rs_total");
 
   valorServico.innerHTML = parseInt(currentCheckbox.value);
-  valorTotal.innerHTML = (parseInt(currentCheckbox.value) + 1);
+  valorTotal.innerHTML = parseInt(currentCheckbox.value);
 
   if (currentCheckbox.value == "Nao Disponivel") {
     valorServico.innerHTML = currentCheckbox.value;
