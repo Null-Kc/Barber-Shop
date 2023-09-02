@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Agenda</title>
+    <title>Agenda CorteCerto</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css">
 
+    <!-- Utilizacao do FireBase -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
         import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
       
-        // Your web app's Firebase configuration
         const firebaseConfig = {
           piKey: "AIzaSyCxXkHY5bOQTCoOL12bbtT98x9MUlLoH-o",
           authDomain: "barbearia-8b93d.firebaseapp.com",
@@ -22,7 +21,6 @@
           measurementId: "G-HJM3S5CCR9"
         };
       
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore();
       
@@ -168,10 +166,12 @@
     </script>
 </head>
 <body>
-    <h1 class="title">Agenda</h1>
-    <div class="box_agenda">
-      <div id="cardsContainer"></div>
-      
-    </div>
+    <!-- Pagina da agenda do site  -->
+    <main>
+      <h1 class="title">Agenda</h1>
+      <div class="box_agenda">
+        <div id="cardsContainer"></div>
+      </div>
+    </main>
 </body>
 </html>
